@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harsh Uchiha — My Story</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Poppins', 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ffeaf4 0%, #b2d8f7 100%), url('bg.jpg') center/cover no-repeat fixed;
+      color: #444;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .story-section {
+      background: rgba(255,255,255,0.18);
+      padding: 2.5rem 2rem 2rem 2rem;
+      margin: 2.5rem auto;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(255,182,213,0.18), 0 2px 8px #fff2;
+      max-width: 700px;
+      transition: transform 0.3s cubic-bezier(.4,2,.2,1), box-shadow 0.3s;
+      position: relative;
+      backdrop-filter: blur(12px);
+      border-left: 6px solid #ff69b4;
+    }
+
+    .story-section:hover {
+      transform: scale(1.03) translateY(-6px);
+      box-shadow: 0 16px 48px #ffb6d5cc, 0 2px 8px #fff2;
+      border-left-width: 10px;
+      background: rgba(255,255,255,0.32);
+    }
+
+    .story-section h2 {
+      font-size: 2rem;
+      color: #ff69b4;
+      margin-bottom: 18px;
+      font-family: 'Poppins', 'Segoe UI', serif;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 24px #fff2;
+      text-align: center;
+    }
+
+    .story-section p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #444;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .hobby-boxes {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 0;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .hobby-boxes li {
+      background: linear-gradient(90deg, #ffb6d5 0%, #b2d8f7 100%);
+      color: #b4005a;
+      padding: 15px 20px;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 2px 12px #ffb6d555;
+      flex: 1 1 30%;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .hobby-boxes li:hover {
+      transform: scale(1.08) rotate(-2deg);
+      background: linear-gradient(90deg, #ff69b4 0%, #b2d8f7 100%);
+      color: #fff;
+    }
+
+    .comment-box {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.85);
+      padding: 18px 15px 10px 15px;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px #ffb6d5a0;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .comment-input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      resize: vertical;
+      font-size: 1.05rem;
+      background: #ffeaf4;
+      color: #b4005a;
+      margin-bottom: 10px;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      box-shadow: 0 1px 8px #ffb6d555;
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+    .comment-input:focus {
+      box-shadow: 0 2px 16px #ffb6d5aa;
+      background: #fff;
+    }
+
+    .comment-box button {
+      padding: 10px 24px;
+      background: linear-gradient(90deg, #ff69b4 0%, #b2d8f7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.08rem;
+      font-weight: 700;
+      box-shadow: 0 2px 12px #ffb6d5a0;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      margin-bottom: 8px;
+    }
+    .comment-box button:hover {
+      background: linear-gradient(90deg, #ff85c1 0%, #ffeaa7 100%);
+      color: #b4005a;
+      transform: scale(1.06);
+      box-shadow: 0 8px 32px #ffb6d5c0;
+    }
+
+    .comments-list {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #b4005a;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      text-align: left;
+      max-height: 120px;
+      overflow-y: auto;
+      padding-left: 6px;
+    }
+
+    .comments-list div {
+      margin-bottom: 8px;
+      background: #ffeaf4;
+      border-radius: 8px;
+      padding: 7px 12px;
+      color: #b4005a;
+      box-shadow: 0 1px 6px #ffb6d555;
+      word-break: break-word;
+    }
+
+    @media (max-width: 700px) {
+      .story-section {
+        padding: 1.2rem 0.7rem;
+        margin: 1.2rem 0.3rem;
+      }
+      .story-section h2 {
+        font-size: 1.3rem;
+      }
+      .story-section p {
+        font-size: 1rem;
+      }
+      .hobby-boxes li {
+        font-size: 0.95rem;
+        padding: 10px 8px;
+      }
+      .comment-box {
+        padding: 10px 5px 8px 5px;
+      }
+      .comment-input {
+        font-size: 0.95rem;
+      }
+      .comment-box button {
+        font-size: 0.95rem;
+        padding: 8px 14px;
+      }
+      .comments-list {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sections START -->
+  <section class="story-section">
+    <h2>Early Life</h2>
+    <p>I was born curious and energetic, always asking “why” even before I could spell it. My brain was a sponge, soaking up everything from cartoons to stars in the sky.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>Childhood</h2>
+    <p>Growing up, I was *that* kid – the one climbing trees, learning 3 things at once, and inventing games out of anything. I didn’t just play, I created adventures.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>School Life</h2>
+    <p>School was fun but chaotic. My brain always wanted to jump between bio, sketching, and anime. I loved learning, but my interests? They had ADHD for hobbies 🤪</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>High School</h2>
+    <p>This is when I started dreaming *big*. I was like, “I wanna be a doctor” one day, and “I wanna build a web empire” the next. I started learning web dev while prepping for NEET.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>Friends</h2>
+    <p>People energize me. I love deep convos, random jokes, and chilling with friends. They’re not just people — they’re chapters of my story.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>Family</h2>
+    <p>I’m super close to my fam. They keep me grounded while I chase a million dreams. Especially my sis Angel — she's like my sidekick in all this madness 💫</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>Love</h2>
+    <p>I’m a romantic overthinker. Love for me isn’t just about butterflies — it’s about understanding, support, and vibing at soul-level. I believe in pure, deep love 💖</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2>Hobbies</h2>
+    <ul class="hobby-boxes">
+      <li>🎧 Music</li>
+      <li>🛹 Sports</li>
+      <li>🎮 Gaming</li>
+      <li>💻 Coding</li>
+      <li>📺 Anime</li>
+      <li>📖 Geography & Biology Talks</li>
+      <li>📷 Scroling</li>
+      <li>✈️ Travelling</li>
+      <li>🖌️ Graphic Design</li>
+      <li>🎨 Sketching</li>
+    </ul>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+  <!-- Sections END -->
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTcZhqWNtQfzwmVSLUj-UVrNSmfso8M-E",
+      authDomain: "comment-42a8d.firebaseapp.com",
+      databaseURL: "https://comment-42a8d-default-rtdb.firebaseio.com",
+      projectId: "comment-42a8d",
+      storageBucket: "comment-42a8d.firebasestorage.app",
+      messagingSenderId: "907945120076",
+      appId: "1:907945120076:web:eb18596749736cabe2bfe9",
+      measurementId: "G-CYY165F7ZN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.postComment = async function (btn) {
+      const section = btn.closest('.story-section');
+      const commentBox = section.querySelector('.comment-input');
+      const comment = commentBox.value.trim();
+      const topic = section.querySelector('h2').innerText;
+
+      if (comment !== "") {
+        await addDoc(collection(db, "comments"), {
+          topic: topic,
+          comment: comment,
+          time: new Date()
+        });
+        commentBox.value = "";
+      }
+    };
+
+    // Load comments
+    const q = query(collection(db, "comments"));
+    onSnapshot(q, (snapshot) => {
+      document.querySelectorAll('.story-section').forEach(section => {
+        const topic = section.querySelector('h2').innerText;
+        const commentList = section.querySelector('.comments-list');
+        commentList.innerHTML = ""; // clear old
+
+        snapshot.docs.forEach(doc => {
+          const data = doc.data();
+          if (data.topic === topic) {
+            const div = document.createElement('div');
+            div.textContent = "💬 " + data.comment;
+            commentList.appendChild(div);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

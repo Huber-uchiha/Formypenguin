@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A Love Story Unfolds 💖</title>
+  <link rel="stylesheet" href="trailer.css" />
+</head>
+<body>
+  <canvas id="sparkle-bg"></canvas>
+  <canvas id="heart-rain"></canvas>
+
+  <div class="coming-soon-container">
+    <h1>Coming Soon...</h1>
+    <p class="soon-message">
+      This page is still being crafted with love.<br>
+      Please check back soon for more magic!<br>
+      <span class="soon-heart">💖</span>
+    </p>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <!-- Animated pickup lines and facts at the bottom -->
+  <div class="sweet-extras">
+    <div class="pickup-typewriter-box">
+      <div class="pickup-typewriter" id="pickupTypewriter"></div>
+    </div>
+    <div class="fact-typewriter-box">
+      <span class="fact-label">💡 Heart Fact:</span>
+      <span id="factTypewriter"></span>
+      <button class="fact-btn" onclick="showNextFact()">Show</button>
+    </div>
+  </div>
+
+  <script src="jsss.js"></script>
+  <script>
+    // Sparkle background animation
+    const canvas = document.getElementById('sparkle-bg');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    window.addEventListener('resize', () => {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    });
+    const sparkles = [];
+    for (let i = 0; i < 70; i++) {
+      sparkles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.8 + 0.7,
+        o: Math.random() * 0.7 + 0.3,
+        d: Math.random() * 2 * Math.PI,
+        s: Math.random() * 0.7 + 0.3
+      });
+    }
+    function drawSparkles() {
+      ctx.clearRect(0, 0, w, h);
+      for (let s of sparkles) {
+        ctx.save();
+        ctx.globalAlpha = s.o * (0.7 + 0.3 * Math.sin(Date.now()/400 + s.d));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * (1 + 0.4 * Math.sin(Date.now()/600 + s.d)), 0, 2 * Math.PI);
+        ctx.fillStyle = "#fff8";
+        ctx.shadowColor = "#fff";
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+        s.x += Math.sin(s.d) * s.s * 0.15;
+        s.y += Math.cos(s.d) * s.s * 0.15;
+        if (s.x < 0) s.x = w;
+        if (s.x > w) s.x = 0;
+        if (s.y < 0) s.y = h;
+        if (s.y > h) s.y = 0;
+      }
+      requestAnimationFrame(drawSparkles);
+    }
+    drawSparkles();
+
+    // Heart Rain Animation
+    const heartCanvas = document.getElementById('heart-rain');
+    const heartCtx = heartCanvas.getContext('2d');
+    let hw = window.innerWidth, hh = window.innerHeight;
+    heartCanvas.width = hw; heartCanvas.height = hh;
+    window.addEventListener('resize', () => {
+      hw = window.innerWidth; hh = window.innerHeight;
+      heartCanvas.width = hw; heartCanvas.height = hh;
+    });
+    const heartCount = 24;
+    const hearts = [];
+    for (let i = 0; i < heartCount; i++) {
+      hearts.push({
+        x: Math.random() * hw,
+        y: Math.random() * hh,
+        size: Math.random() * 28 + 18,
+        speed: Math.random() * 0.6 + 0.2,
+        drift: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.4 + 0.3,
+        delay: Math.random() * 2000
+      });
+    }
+    function drawHeart(ctx, x, y, size, opacity) {
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.font = `bold ${size + 6}px serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "#ff69b4";
+      ctx.shadowBlur = 24;
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2.5;
+      ctx.strokeText("❤️", x, y);
+      ctx.fillText("❤️", x, y);
+      ctx.restore();
+    }
+    function animateHearts() {
+      heartCtx.clearRect(0, 0, hw, hh);
+      const now = Date.now();
+      for (let h of hearts) {
+        if (now % 3000 < h.delay) continue;
+        drawHeart(heartCtx, h.x, h.y, h.size, h.opacity);
+        h.y += h.speed;
+        h.x += h.drift;
+        if (h.y > hh + 40) {
+          h.y = -40;
+          h.x = Math.random() * hw;
+          h.size = Math.random() * 28 + 18;
+          h.speed = Math.random() * 0.6 + 0.2;
+          h.drift = (Math.random() - 0.5) * 0.5;
+          h.opacity = Math.random() * 0.4 + 0.3;
+          h.delay = Math.random() * 2000;
+        }
+      }
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+  </script>
+</body>
+</html>

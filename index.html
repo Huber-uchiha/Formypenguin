@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Sweetheart 💖</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Show answer only on hover */
+    .qa-block .qa-answer {
+      opacity: 0;
+      max-height: 0;
+      pointer-events: none;
+      transition: opacity 0.7s, max-height 0.7s;
+    }
+
+    .qa-block:hover .qa-answer,
+    .qa-block:focus-within .qa-answer {
+      opacity: 1;
+      max-height: 200px;
+      pointer-events: auto;
+      transition: opacity 0.7s, max-height 0.7s;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="heart-rain"></canvas>
+  <div class="overlay" id="intro">
+    <div id="qa-sequence">
+      <div class="qa-block" id="q1">
+        <h1 class="qa-question">What is this?</h1>
+        <div class="qa-answer"></div>
+      </div>
+      <div class="qa-block" id="q2">
+        <h1 class="qa-question">Why me?</h1>
+        <div class="qa-answer"></div>
+      </div>
+      <div class="qa-block" id="q3">
+        <h1 class="qa-question">Why now?</h1>
+        <div class="qa-answer"></div>
+      </div>
+      <button id="enterBtn" class="fade-in-up" style="opacity:0;">Yes, take me in 💫</button>
+    </div>
+  </div>
+
+  <div class="main" id="mainContent">
+    <h2 class="fade-in-up">This Is Our Journey Together 💖</h2>
+    <div class="cards">
+      <div class="card border-pink" tabindex="0" data-link="confession.html">
+        <h3 class="heading">Step 1: The Confession 💌</h3>
+        <p>When my heart whispered your name... and I realized this wasn’t just a crush.</p>
+        <div class="card-detail">That moment when I realized you were more than a fleeting thought—my heart chose you, and every day since has been a gentle confession of that love.</div>
+      </div>
+      <div class="card border-blue" tabindex="0" data-link="aboutme.html">
+        <h3>Step 2: About Me 🙋‍♂️</h3>
+        <p>Here’s the real me. The good, the bad, the coding nights and soft-hearted dreams.</p>
+        <div class="card-detail">I am a mosaic of late-night dreams, hopeful code, and a heart that beats a little faster for you. This is my story, and you are its muse.</div>
+      </div>
+      <div class="card border-green" tabindex="0" data-link="aboutyou.html">
+        <h3>Step 3: About You 🌸</h3>
+        <p>From piano keys to boxing gloves—you are magic. And I adore everything you do.</p>
+        <div class="card-detail">You are the melody in my quiet, the spark in my ordinary. Every talent, every smile, every moment with you is a page in my favorite story.</div>
+      </div>
+      <div class="card border-yellow" tabindex="0" data-link="proposal.html">
+        <h3>Step 4: The Proposal 💍</h3>
+        <p>Where I ask the biggest question—with all my heart and every line of code.</p>
+        <div class="card-detail">This is where my journey finds its meaning—where I ask you to be my forever, with every hope, every promise, and every heartbeat.</div>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="sparkle-bg" style="position:fixed; top:0; left:0; pointer-events:none;"></canvas>
+
+  <script>
+    // Q&A Cinematic Sequence
+    const qaData = [
+      {
+        q: "What is this?",
+        a: "Because today is lucky."
+      },
+      {
+        q: "Why me?",
+        a: "Because you are rare, magical… and I couldn’t wait another day to show this to you."
+      },
+      {
+        q: "Why now?",
+        a: "Because today is 7/7 – a lucky charm of a date."
+      }
+    ];
+    const qaBlocks = [
+      document.getElementById('q1'),
+      document.getElementById('q2'),
+      document.getElementById('q3')
+    ];
+    const answers = [
+      "Sweetheart, this is a website made just for you... Crafted with time, love, and every tiny detail I adore about you.",
+      "Because you are rare, magical… and I couldn’t wait another day to show this to you.",
+      "Because today is 7/7 – a lucky charm of a date."
+    ];
+    const qaAnswers = [
+      qaBlocks[0].querySelector('.qa-answer'),
+      qaBlocks[1].querySelector('.qa-answer'),
+      qaBlocks[2].querySelector('.qa-answer')
+    ];
+    const enterBtn = document.getElementById('enterBtn');
+    qaBlocks.forEach((block, i) => {
+      block.style.opacity = 0;
+      block.style.display = 'none';
+    });
+    enterBtn.style.opacity = 0;
+    enterBtn.style.display = 'none';
+
+    function showQA(idx) {
+      if (idx >= qaBlocks.length) {
+        enterBtn.style.display = 'inline-block';
+        setTimeout(() => {
+          enterBtn.style.opacity = 1;
+          enterBtn.classList.add('pop-in');
+        }, 600);
+        return;
+      }
+      const block = qaBlocks[idx];
+      block.style.display = 'block';
+      setTimeout(() => {
+        block.style.opacity = 1;
+        block.classList.add('qa-fade-in');
+        setTimeout(() => {
+          qaAnswers[idx].textContent = answers[idx];
+          qaAnswers[idx].classList.add('qa-answer-fade');
+          setTimeout(() => showQA(idx + 1), 1800);
+        }, 1200);
+      }, 400);
+    }
+    setTimeout(() => showQA(0), 600);
+
+    // Button click transitions to main content
+    enterBtn.onclick = function() {
+      document.getElementById('intro').classList.add('fade-out');
+      setTimeout(() => {
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        document.getElementById('mainContent').classList.add('fade-in');
+      }, 700);
+    };
+
+    // Sparkle background animation
+    const canvas = document.getElementById('sparkle-bg');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    canvas.width = w; canvas.height = h;
+
+    window.addEventListener('resize', () => {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    });
+
+    const sparkles = [];
+    for (let i = 0; i < 70; i++) {
+      sparkles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.8 + 0.7,
+        o: Math.random() * 0.7 + 0.3,
+        d: Math.random() * 2 * Math.PI,
+        s: Math.random() * 0.7 + 0.3
+      });
+    }
+
+    function drawSparkles() {
+      ctx.clearRect(0, 0, w, h);
+      for (let s of sparkles) {
+        ctx.save();
+        ctx.globalAlpha = s.o * (0.7 + 0.3 * Math.sin(Date.now()/400 + s.d));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * (1 + 0.4 * Math.sin(Date.now()/600 + s.d)), 0, 2 * Math.PI);
+        ctx.fillStyle = "#fff8";
+        ctx.shadowColor = "#fff";
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+        // Twinkle movement
+        s.x += Math.sin(s.d) * s.s * 0.15;
+        s.y += Math.cos(s.d) * s.s * 0.15;
+        if (s.x < 0) s.x = w;
+        if (s.x > w) s.x = 0;
+        if (s.y < 0) s.y = h;
+        if (s.y > h) s.y = 0;
+      }
+      requestAnimationFrame(drawSparkles);
+    }
+    drawSparkles();
+
+    // Heart Rain Animation
+    const heartCanvas = document.getElementById('heart-rain');
+    const heartCtx = heartCanvas.getContext('2d');
+    let hw = window.innerWidth, hh = window.innerHeight;
+    heartCanvas.width = hw; heartCanvas.height = hh;
+
+    window.addEventListener('resize', () => {
+      hw = window.innerWidth; hh = window.innerHeight;
+      heartCanvas.width = hw; heartCanvas.height = hh;
+    });
+
+    const heartCount = 24;
+    const hearts = [];
+    for (let i = 0; i < heartCount; i++) {
+      hearts.push({
+        x: Math.random() * hw,
+        y: Math.random() * hh,
+        size: Math.random() * 28 + 18,
+        speed: Math.random() * 0.6 + 0.2,
+        drift: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.4 + 0.3,
+        delay: Math.random() * 2000
+      });
+    }
+
+    function drawHeart(ctx, x, y, size, opacity) {
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.font = `bold ${size + 6}px serif`; // Make font bolder and slightly larger
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "#ff69b4";
+      ctx.shadowBlur = 24; // Stronger glow
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2.5;
+      ctx.strokeText("❤️", x, y); // White outline for extra pop
+      ctx.fillText("❤️", x, y);
+      ctx.restore();
+    }
+
+    function animateHearts() {
+      heartCtx.clearRect(0, 0, hw, hh);
+      const now = Date.now();
+      for (let h of hearts) {
+        if (now % 3000 < h.delay) continue;
+        drawHeart(heartCtx, h.x, h.y, h.size, h.opacity);
+        h.y += h.speed;
+        h.x += h.drift;
+        if (h.y > hh + 40) {
+          h.y = -40;
+          h.x = Math.random() * hw;
+          h.size = Math.random() * 28 + 18;
+          h.speed = Math.random() * 0.6 + 0.2;
+          h.drift = (Math.random() - 0.5) * 0.5;
+          h.opacity = Math.random() * 0.4 + 0.3;
+          h.delay = Math.random() * 2000;
+        }
+      }
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+
+    document.querySelectorAll('.card[data-link]').forEach(card => {
+      card.addEventListener('click', () => {
+        window.location.href = card.getAttribute('data-link');
+      });
+      card.addEventListener('keypress', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          window.location.href = card.getAttribute('data-link');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

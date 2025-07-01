@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Step 4: The Proposal 💍</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Poppins', 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ffeaf4 0%, #b2d8f7 100%), url('bg.jpg') center/cover no-repeat fixed;
+      color: #b4005a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    #sparkle-bg, #heart-rain {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .proposal-container {
+      position: relative;
+      z-index: 10;
+      max-width: 560px;
+      margin: 8vh auto 0 auto;
+      background: rgba(255,255,255,0.18);
+      border-radius: 28px;
+      box-shadow: 0 8px 32px #ffb6d5cc, 0 2px 8px #fff2;
+      backdrop-filter: blur(12px);
+      padding: 3rem 2rem 2.5rem 2rem;
+      text-align: center;
+      animation: cinematicZoom 1.5s cubic-bezier(.4,0,.2,1);
+    }
+    .proposal-heading {
+      font-size: 2.1rem;
+      color: #ff69b4;
+      font-family: 'Poppins', 'Segoe UI', serif;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 24px #fff2;
+    }
+    .proposal-message {
+      font-size: 1.18rem;
+      color: #b4005a;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .proposal-detail {
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #ffb6d5a0;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 1.08rem;
+      color: #b4005a;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      text-align: center;
+      display: inline-block;
+      max-width: 95%;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 10px 22px;
+      background: linear-gradient(90deg, #ff69b4 0%, #b2d8f7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 2px 12px #ffb6d5a0;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .back-btn:hover {
+      background: linear-gradient(90deg, #ff85c1 0%, #ffeaa7 100%);
+      color: #b4005a;
+      transform: scale(1.06);
+      box-shadow: 0 8px 32px #ffb6d5c0;
+    }
+    /* FAQ Section */
+    .faq-section {
+      margin: 4rem auto 2rem auto;
+      max-width: 700px;
+      background: rgba(255,255,255,0.13);
+      border-radius: 24px;
+      box-shadow: 0 4px 24px #ffb6d5a0;
+      padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+      text-align: left;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+      position: relative;
+    }
+    .faq-title {
+      text-align: center;
+      color: #ff69b4;
+      font-size: 1.6rem;
+      font-family: 'Poppins', serif;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .faq-q {
+      font-weight: 700;
+      color: #b4005a;
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.13rem;
+      font-family: 'Poppins', serif;
+    }
+    .faq-a {
+      color: #444;
+      font-size: 1.08rem;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.1rem;
+      background: rgba(255,255,255,0.7);
+      border-radius: 12px;
+      padding: 0.7rem 1rem;
+      box-shadow: 0 1px 8px #ffb6d555;
+    }
+    @media (max-width: 700px) {
+      .proposal-container, .faq-section {
+        padding: 1.2rem 0.7rem;
+        border-radius: 18px;
+      }
+      .proposal-heading {
+        font-size: 1.3rem;
+      }
+      .proposal-message, .proposal-detail, .faq-q, .faq-a {
+        font-size: 1rem;
+      }
+      .faq-title {
+        font-size: 1.1rem;
+      }
+    }
+    @keyframes cinematicZoom {
+      0% { transform: scale(1.1); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    /* Comment box styles */
+    .comment-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px #ffb6d5a0;
+      text-align: left;
+    }
+    .comment-input {
+      width: 100%;
+      height: 60px;
+      padding: 10px;
+      border: 1px solid #ff69b4;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .comment-input:focus {
+      border-color: #b4005a;
+    }
+    .comment-box button {
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #ff69b4 0%, #b2d8f7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .comment-box button:hover {
+      background: linear-gradient(90deg, #ff85c1 0%, #ffeaa7 100%);
+      transform: scale(1.05);
+    }
+    .comments-list {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background: rgba(255,255,255,0.8);
+      border-radius: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 2px 8px #ffb6d5a0;
+    }
+    .comments-list div {
+      font-size: 0.9rem;
+      color: #444;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #ffb6d5a0;
+    }
+    .comments-list div:last-child {
+      border-bottom: none;
+    }
+    .proposal-response-btns {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .yes-btn, .no-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .yes-btn {
+      background: linear-gradient(90deg, #6ee7b7 0%, #3b82f6 100%);
+      color: #fff;
+    }
+    .no-btn {
+      background: linear-gradient(90deg, #f87171 0%, #ef4444 100%);
+      color: #fff;
+    }
+    .yes-btn:hover, .no-btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="sparkle-bg"></canvas>
+  <canvas id="heart-rain"></canvas>
+  <div class="proposal-container">
+    <div class="proposal-heading">Step 4: The Proposal 💍</div>
+    <div class="proposal-message">
+      Where I ask the biggest question—with all my heart and every line of code.
+    </div>
+    <div class="proposal-detail">
+      This is where my journey finds its meaning—where I ask you to be my forever, with every hope, every promise, and every heartbeat.<br><br>
+      <span style="font-size:1.5rem; color:#ff69b4; font-weight:700;">Will you be mine?</span>
+    </div>
+    <div class="proposal-response-btns">
+      <button class="yes-btn" onclick="submitProposalAnswer('Yes')">Yes 💖</button>
+      <button class="no-btn" onclick="submitProposalAnswer('No')">No 😢</button>
+    </div>
+    <!-- Comment box for proposal section -->
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="faq-section">
+    <div class="faq-title">Frequently Asked Questions 💬</div>
+    <div class="faq-q">Q: Is this proposal for real?</div>
+    <div class="faq-a">A: 100% real, from the bottom of my heart and every bit of my code.</div>
+    <div class="faq-q">Q: Why a website?</div>
+    <div class="faq-a">A: Because words sometimes fall short, but code lets me show you how much you mean to me in a magical, lasting way.</div>
+    <div class="faq-q">Q: What happens if I say yes?</div>
+    <div class="faq-a">A: Then my world will be brighter, and our story will have the happiest next chapter. (And maybe a surprise page will unlock!)</div>
+    <div class="faq-q">Q: What if I need time?</div>
+    <div class="faq-a">A: Take all the time you need. My feelings—and this website—aren’t going anywhere.</div>
+    <div class="faq-q">Q: Can I revisit this page?</div>
+    <div class="faq-a">A: Always! This is your space, your story, and your answer—whenever you’re ready.</div>
+    <!-- Comment box for FAQ section -->
+    <div class="comment-box">
+      <textarea placeholder="Share your FAQ thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs and comment logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTcZhqWNtQfzwmVSLUj-UVrNSmfso8M-E",
+      authDomain: "comment-42a8d.firebaseapp.com",
+      databaseURL: "https://comment-42a8d-default-rtdb.firebaseio.com",
+      projectId: "comment-42a8d",
+      storageBucket: "comment-42a8d.firebasestorage.app",
+      messagingSenderId: "907945120076",
+      appId: "1:907945120076:web:eb18596749736cabe2bfe9",
+      measurementId: "G-CYY165F7ZN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.postComment = async function (btn) {
+      const section = btn.closest('.proposal-container, .faq-section, .confession-container');
+      const commentBox = btn.parentElement.querySelector('.comment-input');
+      const comment = commentBox.value.trim();
+      let topic = section.querySelector('.proposal-heading, .faq-title, .confession-heading');
+      topic = topic ? topic.innerText : "General";
+
+      if (comment !== "") {
+        await addDoc(collection(db, "comments"), {
+          topic: topic,
+          comment: comment,
+          time: new Date()
+        });
+        commentBox.value = "";
+      }
+    };
+
+    // Load comments
+    const q = query(collection(db, "comments"));
+    onSnapshot(q, (snapshot) => {
+      document.querySelectorAll('.proposal-container, .faq-section, .confession-container').forEach(section => {
+        let topic = section.querySelector('.proposal-heading, .faq-title, .confession-heading');
+        topic = topic ? topic.innerText : "General";
+        section.querySelectorAll('.comments-list').forEach(commentList => {
+          commentList.innerHTML = "";
+          snapshot.docs.forEach(doc => {
+            const data = doc.data();
+            if (data.topic === topic) {
+              const div = document.createElement('div');
+              div.textContent = "💬 " + data.comment;
+              commentList.appendChild(div);
+            }
+          });
+        });
+      });
+    });
+  </script>
+
+  <!-- Sparkle background animation -->
+  <script>
+    const canvas = document.getElementById('sparkle-bg');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    canvas.width = w; canvas.height = h;
+    window.addEventListener('resize', () => {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w; canvas.height = h;
+    });
+    const sparkles = [];
+    for (let i = 0; i < 70; i++) {
+      sparkles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.8 + 0.7,
+        o: Math.random() * 0.7 + 0.3,
+        d: Math.random() * 2 * Math.PI,
+        s: Math.random() * 0.7 + 0.3
+      });
+    }
+    function drawSparkles() {
+      ctx.clearRect(0, 0, w, h);
+      for (let s of sparkles) {
+        ctx.save();
+        ctx.globalAlpha = s.o * (0.7 + 0.3 * Math.sin(Date.now()/400 + s.d));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * (1 + 0.4 * Math.sin(Date.now()/600 + s.d)), 0, 2 * Math.PI);
+        ctx.fillStyle = "#fff8";
+        ctx.shadowColor = "#fff";
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+        s.x += Math.sin(s.d) * s.s * 0.15;
+        s.y += Math.cos(s.d) * s.s * 0.15;
+        if (s.x < 0) s.x = w;
+        if (s.x > w) s.x = 0;
+        if (s.y < 0) s.y = h;
+        if (s.y > h) s.y = 0;
+      }
+      requestAnimationFrame(drawSparkles);
+    }
+    drawSparkles();
+  </script>
+
+  <!-- Heart Rain Animation -->
+  <script>
+    const heartCanvas = document.getElementById('heart-rain');
+    const heartCtx = heartCanvas.getContext('2d');
+    let hw = window.innerWidth, hh = window.innerHeight;
+    heartCanvas.width = hw; heartCanvas.height = hh;
+    window.addEventListener('resize', () => {
+      hw = window.innerWidth; hh = window.innerHeight;
+      heartCanvas.width = hw; heartCanvas.height = hh;
+    });
+    const heartCount = 24;
+    const hearts = [];
+    for (let i = 0; i < heartCount; i++) {
+      hearts.push({
+        x: Math.random() * hw,
+        y: Math.random() * hh,
+        size: Math.random() * 28 + 18,
+        speed: Math.random() * 0.6 + 0.2,
+        drift: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.4 + 0.3,
+        delay: Math.random() * 2000
+      });
+    }
+    function drawHeart(ctx, x, y, size, opacity) {
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.font = `bold ${size + 6}px serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "#ff69b4";
+      ctx.shadowBlur = 24;
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2.5;
+      ctx.strokeText("❤️", x, y);
+      ctx.fillText("❤️", x, y);
+      ctx.restore();
+    }
+    function animateHearts() {
+      heartCtx.clearRect(0, 0, hw, hh);
+      const now = Date.now();
+      for (let h of hearts) {
+        if (now % 3000 < h.delay) continue;
+        drawHeart(heartCtx, h.x, h.y, h.size, h.opacity);
+        h.y += h.speed;
+        h.x += h.drift;
+        if (h.y > hh + 40) {
+          h.y = -40;
+          h.x = Math.random() * hw;
+          h.size = Math.random() * 28 + 18;
+          h.speed = Math.random() * 0.6 + 0.2;
+          h.drift = (Math.random() - 0.5) * 0.5;
+          h.opacity = Math.random() * 0.4 + 0.3;
+          h.delay = Math.random() * 2000;
+        }
+      }
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+  </script>
+</body>
+</html>
