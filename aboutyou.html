@@ -84,124 +84,209 @@
       0% { transform: scale(1.1); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
+
+    /* About You Blocks Styles */
+    .about-block {
+      max-width: 800px;
+      margin: 4rem auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem 2rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .about-block h2 {
+      font-size: 1.8rem;
+      color: #ff69b4;
+      font-family: 'Poppins', 'Segoe UI', serif;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    .about-block h2::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: -6px;
+      left: 0;
+      background: linear-gradient(90deg, #ff69b4 0%, #b2d8f7 100%);
+      border-radius: 2px;
+    }
+    .about-block p {
+      font-size: 1.1rem;
+      color: #333;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .comment-box {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 1.5rem;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+    .comment-input:focus {
+      border-color: #ff69b4;
+      outline: none;
+    }
+    .comment-box button {
+      background: linear-gradient(90deg, #ff69b4 0%, #b2d8f7 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .comment-box button:hover {
+      background: linear-gradient(90deg, #ff85c1 0%, #ffeaa7 100%);
+      transform: translateY(-2px);
+    }
+    .comments-list {
+      margin-top: 1rem;
+      padding-left: 1.2rem;
+      text-align: left;
+      font-size: 0.9rem;
+      color: #555;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
   <canvas id="sparkle-bg"></canvas>
   <canvas id="heart-rain"></canvas>
-  <div class="not-completed-container">
-    <div class="not-completed-heading">Step 3: About You 🌸</div>
-    <div class="not-completed-message">
-      This page is still being crafted with love.<br>
-      Please check back soon for more magic about you!
-    </div>
-    <div class="not-completed-detail">
-      <span style="font-size:1.5rem; color:#ff69b4; font-weight:700;">Not Completed Yet</span><br>
-      I want this page to be as special as you are. It will be ready soon!
-    </div>
-    <a href="index.html" class="back-btn">← Back to Home</a>
-  </div>
-  <script>
-    // Sparkle background animation
-    const canvas = document.getElementById('sparkle-bg');
-    const ctx = canvas.getContext('2d');
-    let w = window.innerWidth, h = window.innerHeight;
-    canvas.width = w; canvas.height = h;
-    window.addEventListener('resize', () => {
-      w = window.innerWidth; h = window.innerHeight;
-      canvas.width = w; canvas.height = h;
-    });
-    const sparkles = [];
-    for (let i = 0; i < 70; i++) {
-      sparkles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.8 + 0.7,
-        o: Math.random() * 0.7 + 0.3,
-        d: Math.random() * 2 * Math.PI,
-        s: Math.random() * 0.7 + 0.3
-      });
-    }
-    function drawSparkles() {
-      ctx.clearRect(0, 0, w, h);
-      for (let s of sparkles) {
-        ctx.save();
-        ctx.globalAlpha = s.o * (0.7 + 0.3 * Math.sin(Date.now()/400 + s.d));
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * (1 + 0.4 * Math.sin(Date.now()/600 + s.d)), 0, 2 * Math.PI);
-        ctx.fillStyle = "#fff8";
-        ctx.shadowColor = "#fff";
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.restore();
-        s.x += Math.sin(s.d) * s.s * 0.15;
-        s.y += Math.cos(s.d) * s.s * 0.15;
-        if (s.x < 0) s.x = w;
-        if (s.x > w) s.x = 0;
-        if (s.y < 0) s.y = h;
-        if (s.y > h) s.y = 0;
-      }
-      requestAnimationFrame(drawSparkles);
-    }
-    drawSparkles();
 
-    // Heart Rain Animation
-    const heartCanvas = document.getElementById('heart-rain');
-    const heartCtx = heartCanvas.getContext('2d');
-    let hw = window.innerWidth, hh = window.innerHeight;
-    heartCanvas.width = hw; heartCanvas.height = hh;
-    window.addEventListener('resize', () => {
-      hw = window.innerWidth; hh = window.innerHeight;
-      heartCanvas.width = hw; heartCanvas.height = hh;
-    });
-    const heartCount = 24;
-    const hearts = [];
-    for (let i = 0; i < heartCount; i++) {
-      hearts.push({
-        x: Math.random() * hw,
-        y: Math.random() * hh,
-        size: Math.random() * 28 + 18,
-        speed: Math.random() * 0.6 + 0.2,
-        drift: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.4 + 0.3,
-        delay: Math.random() * 2000
-      });
-    }
-    function drawHeart(ctx, x, y, size, opacity) {
-      ctx.save();
-      ctx.globalAlpha = opacity;
-      ctx.font = `bold ${size + 6}px serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.shadowColor = "#ff69b4";
-      ctx.shadowBlur = 24;
-      ctx.strokeStyle = "#fff";
-      ctx.lineWidth = 2.5;
-      ctx.strokeText("❤️", x, y);
-      ctx.fillText("❤️", x, y);
-      ctx.restore();
-    }
-    function animateHearts() {
-      heartCtx.clearRect(0, 0, hw, hh);
-      const now = Date.now();
-      for (let h of hearts) {
-        if (now % 3000 < h.delay) continue;
-        drawHeart(heartCtx, h.x, h.y, h.size, h.opacity);
-        h.y += h.speed;
-        h.x += h.drift;
-        if (h.y > hh + 40) {
-          h.y = -40;
-          h.x = Math.random() * hw;
-          h.size = Math.random() * 28 + 18;
-          h.speed = Math.random() * 0.6 + 0.2;
-          h.drift = (Math.random() - 0.5) * 0.5;
-          h.opacity = Math.random() * 0.4 + 0.3;
-          h.delay = Math.random() * 2000;
-        }
+  <!-- About You Blocks START -->
+  <section class="about-block">
+    <h2>Your Talents</h2>
+    <p>You light up every room with your music, your art, and your energy. Whether it’s piano keys or boxing gloves, you make everything look effortless and magical.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="about-block">
+    <h2>Your Smile</h2>
+    <p>Your smile is my favorite sunrise. It’s the spark that brightens my ordinary days and makes every moment feel special.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="about-block">
+    <h2>Your Kindness</h2>
+    <p>You care deeply, love fiercely, and always know how to make someone feel seen. Your kindness is a gift to everyone around you.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="about-block">
+    <h2>Your Quirks</h2>
+    <p>From your silly jokes to your random facts, every little thing you do makes you even more lovable. You’re perfectly, wonderfully you.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+
+  <section class="about-block">
+    <h2>Why You Matter</h2>
+    <p>You’re the melody in my quiet, the spark in my ordinary. Every talent, every smile, every moment with you is a page in my favorite story.</p>
+    <div class="comment-box">
+      <textarea placeholder="Write your thoughts..." class="comment-input"></textarea>
+      <button onclick="postComment(this)">Post Comment</button>
+      <div class="comments-list"></div>
+    </div>
+  </section>
+  <!-- About You Blocks END -->
+
+  <a href="index.html" class="back-btn">← Back to Home</a>
+
+  <!-- Firebase SDKs and comment logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTcZhqWNtQfzwmVSLUj-UVrNSmfso8M-E",
+      authDomain: "comment-42a8d.firebaseapp.com",
+      databaseURL: "https://comment-42a8d-default-rtdb.firebaseio.com",
+      projectId: "comment-42a8d",
+      storageBucket: "comment-42a8d.firebasestorage.app",
+      messagingSenderId: "907945120076",
+      appId: "1:907945120076:web:eb18596749736cabe2bfe9",
+      measurementId: "G-CYY165F7ZN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.postComment = async function (btn) {
+      const section = btn.closest('.about-block');
+      const commentBox = section.querySelector('.comment-input');
+      const comment = commentBox.value.trim();
+      const topic = section.querySelector('h2').innerText;
+
+      if (comment !== "") {
+        await addDoc(collection(db, "aboutyou_comments"), {
+          topic: topic,
+          comment: comment,
+          time: new Date()
+        });
+        commentBox.value = "";
       }
-      requestAnimationFrame(animateHearts);
-    }
-    animateHearts();
+    };
+
+    // Load comments
+    const q = query(collection(db, "aboutyou_comments"));
+    onSnapshot(q, (snapshot) => {
+      document.querySelectorAll('.about-block').forEach(section => {
+        const topic = section.querySelector('h2').innerText;
+        const commentList = section.querySelector('.comments-list');
+        commentList.innerHTML = ""; // clear old
+
+        snapshot.docs.forEach(doc => {
+          const data = doc.data();
+          if (data.topic === topic) {
+            const div = document.createElement('div');
+            div.textContent = "💬 " + data.comment;
+            commentList.appendChild(div);
+          }
+        });
+      });
+    });
   </script>
+  <!-- (Keep your sparkle and heart rain scripts as before) -->
 </body>
 </html>
